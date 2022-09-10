@@ -1,21 +1,26 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import axios from "axios";
-import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { styled } from '@mui/material/styles';
+import Grid from '@mui/material/Unstable_Grid2';
+import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Card from "./Components/Cards"
 
 
-export default function App() {
+export default function App(props) {
   const [open, setOpen] = React.useState(false);
 
   const [values, setValues] = useState();
   const [listCard, setListCard] = useState([]);
-  
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -23,6 +28,16 @@ export default function App() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  }));
+
+  
 
   const handleRegisterGame = () => {
     console.log(values);
@@ -47,7 +62,9 @@ export default function App() {
                     placa: values.placa,
                     km: values.km,
                 },
-            ]);
+            ]
+           
+            );
         });
     });
 };
@@ -55,7 +72,7 @@ export default function App() {
   useEffect(() => {
     axios.get("http://localhost:3002/list").then((response) => {
       setListCard(response.data);
-    });
+    })
   }, []);
 
   const handleaddValues = (value) => {
@@ -64,6 +81,8 @@ export default function App() {
         [value.target.id]: value.target.value,
     }));
 };
+
+
 
   return (
   <>
@@ -127,25 +146,20 @@ export default function App() {
 
       <div className="conteiner">
       {
-        listCard.map((val) => {
-          return(
-            <>
-            <div className="list">
-          <div className="key" key={val.id}></div>
-          <div className="list-car">Id: {val.idcar}</div>
-          <div className="list-car">Modelo: {val.modelo}</div>
-          <div className="list-car">Marca: {val.marca}</div>
-          <div className="list-car">Placa: {val.placa}</div>
-          <div className="list-car">Km: {val.km}</div>
-          <button>Editar</button>
-          <button>Apagar</button>  
-          </div>
+        listCard.map((val)=>(
+          <Card
+          listCard={listCard}
+          setListCard={setListCard}
+          key={val.idcar}
+          idcar={val.idcar}
+          modelo={val.modelo}
+          marca={val.marca}
+          placa={val.km}
+          km={val.km}
 
+          />
 
-          </>
-        )
-      }
-      )}
+        ))}
 
       </div>
        {/* <button onClick={mostrar}>Novo</button> */}

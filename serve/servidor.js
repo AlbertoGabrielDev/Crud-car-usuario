@@ -52,7 +52,7 @@ app.get("/list", (req,res)=>{
     });
 });
 
-app.put("/editar", (req,res)=>{
+app.put("/edit", (req,res)=>{
     const {idcar} = req.body;
     const {modelo }= req.body;
     const {marca }= req.body;
@@ -72,7 +72,7 @@ app.put("/editar", (req,res)=>{
 app.delete("/delete/:idcar",(req,res)=>{
     const {idcar} = req.params;
     let mysql = "DELETE FROM carro WHERE idcar = ?";
-    db.query(mysql, idcar,(err,result)=>{
+    db.query(mysql, [idcar],(err,result)=>{
         if(err){
             console.log(err);
         }else{
