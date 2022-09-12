@@ -2,11 +2,7 @@ import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import App from '../App';
-
 
 import React, { useState } from "react";
 import axios from "axios";
@@ -41,7 +37,7 @@ export default function Edit(props) {
     }).then(() => {
       props.setListCard(
         props.listCard.map((value) => {
-          return value.idcar == editValues.idcar
+          return value.idcar === editValues.idcar
             ? {
               idcar: editValues.id,
               modelo: editValues.modelo,
@@ -61,7 +57,7 @@ export default function Edit(props) {
     axios.delete(`http://localhost:3002/delete/${editValues.idcar}`).then(() => {
       props.setListCard(
         props.listCard.filter((value) => {
-          return value.idcar != editValues.idcar;
+          return value.idcar !== editValues.idcar;
         })
       );
     });
