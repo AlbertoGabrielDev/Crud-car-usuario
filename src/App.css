@@ -1,7 +1,15 @@
 
-
-.list{
+.list-mu{
    display: flex; 
     justify-content: space-between;
+ }
+
+.list-mu:hover{
+   
+ }
+
+ .button{
+   display: flex;
+   
  }
 

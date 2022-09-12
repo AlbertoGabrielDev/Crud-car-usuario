@@ -1,162 +1,146 @@
 import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import React, { useEffect, useState } from "react";
+import App from '../App';
 
+
+import React, { useState } from "react";
 import axios from "axios";
-import ButtonGroup from '@mui/material/ButtonGroup';
-
 
 export default function Edit(props) {
-    const [open, setOpen] = React.useState(false);
-  
-    const [editValues, setEditValues] = useState({
-        idcar: props.idcar,
-        modelo: props.modelo,
-        marca: props.marca,
-        placa: props.placa,
-        km: props.km,
-      });
+  const [editValues, setEditValues] = useState({
+    idcar: props.idcar,
+    modelo: props.modelo,
+    marca: props.marca,
+    placa: props.placa,
+    km: props.km,
+  });
 
+  const handleChangeValues = (values) => {
+    setEditValues((prevValues) => ({
+      ...prevValues,
+      [values.target.id]: values.target.value,
+    }));
+  };
 
-      const handleChangeValues = (values) =>{
-        setEditValues((prevValues)=>({
-          ...prevValues,[values.target.idcar]: values.target.value,
-        }))
-      }
+  const handleClose = () => {
+    props.setOpen(false);
+  };
 
-
-      const handleEditCar=()=>{
-          axios.put("http://localhost:3002/edit",{
-              idcar: editValues.idcar,
+  const handleEditGame = () => {
+    axios.put("http://localhost:3002/edit", {
+      idcar: editValues.idcar,
+      modelo: editValues.modelo,
+      marca: editValues.marca,
+      placa: editValues.placa,
+      km: editValues.km
+    }).then(() => {
+      props.setListCard(
+        props.listCard.map((value) => {
+          return value.idcar == editValues.idcar
+            ? {
+              idcar: editValues.id,
               modelo: editValues.modelo,
               marca: editValues.marca,
               placa: editValues.placa,
-              km: editValues.km,
-            }).then(()=>{
-              props.setListCard(
-                props.listCard.map((value)=>{
-                  return value.idcar == editValues.idcar
-                  ?{
-                    idcar: editValues.idcar,
-                    modelo: editValues.modelo,
-                    marca: editValues.marca,
-                    km: editValues.km,
-                  }
-                  : value;
-                })
-              )
-            })
-            handleClose();
-        }
-        
+              km: editValues.km
+            }
+            : value;
+        })
+      );
+    });
+    handleClose();
+  };
 
-      const handleDeleteCar = () => {
-        axios.delete(`http://localhost:3002/delete/${editValues.idcar}`)
-        .then(() => {
-          props.setListCard(
-            props.listCard.filter((value) => {
-              return value.idcar != editValues.idcar;
-            })
-          );
-        });
-        handleClose();
-      };
 
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
-  
-    const handleClose = () => {
-      setOpen(false);
-    };
-  
-    return (
-      <div>
-        <Button variant="outlined" onClick={handleClickOpen}>
-          Editar
-        </Button>
-        <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>Editar</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Edite o desejavel.
-            </DialogContentText>
-            <TextField
-              disabled
-              margin="dense"
-              idcar="idcar"
-              label="ID"
-              fullWidth
-              defaultValue={props.idcar}
-              type="text"
-              
-            />
-            <TextField
-              autoFocus
-              margin="dense"
-              idcar="modelo"
-              label="Modelo"
-              type="text"
-              fullWidth
-              variant="standard"
-              defaultValue={props.modelo}
-              onChange={handleChangeValues}
-            />
-            <TextField
-              autoFocus
-              margin="dense"
-              idcar="marca"
-              label="Marca"
-              type="text"
-              fullWidth
-              variant="standard"
-              defaultValue={props.marca}
-              onChange={handleChangeValues}
-            />
-            <TextField
-              autoFocus
-              margin="dense"
-              idcar="placa"
-              label="Placa"
-              type="text"
-              fullWidth
-              variant="standard"
-              defaultValue={props.placa}
-              onChange={handleChangeValues}
-            />
-            <TextField
-              autoFocus
-              margin="dense"
-              idcar="km"
-              label="Km"
-              type="text"
-              fullWidth
-              variant="standard"
-              defaultValue={props.km}
-              onChange={handleChangeValues}
-            />
-          </DialogContent>
+  const handleDeleteGame = () => {
+    axios.delete(`http://localhost:3002/delete/${editValues.idcar}`).then(() => {
+      props.setListCard(
+        props.listCard.filter((value) => {
+          return value.idcar != editValues.idcar;
+        })
+      );
+    });
+    handleClose();
+  };
 
-          <DialogActions>
-            <Button onClick={handleClose}>Sair</Button>
-            <Button onClick={() => handleEditCar() }>Editar</Button>
-            <Button onClick={() => handleDeleteCar() }>Excluir</Button>
-          </DialogActions>
-        </Dialog>
-
-        {/* <ButtonGroup
+  return (
+    <div>
+       <Dialog 
+       open={props.open}
+       onClose = {handleClose}
+       aria-labelledby= "form-dialog-title"
+       >
+         <DialogContent>
+          <div className='list-mu'>
+          <TextField
+            disabled
+            margin="dense"
+            id="idcar"
+            label="idcar"
+            defaultValue={props.idcar}
+            type="text"
+            fullWidth
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="modelo"
+            label="Modelo"
+            defaultValue={props.modelo}
+            type="text"
+            onChange={handleChangeValues}
+            fullWidth
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="marca"
+            label="Marca"
+            defaultValue={props.marca}
+            type="text"
+            onChange={handleChangeValues}
+            fullWidth
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="placa"
+            label="Placa"
+            defaultValue={props.placa}
+            type="text"
+            onChange={handleChangeValues}
+            fullWidth
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="km"
+            label="Km"
+            defaultValue={props.km}
+            type="text"
+            onChange={handleChangeValues}
+            fullWidth
+          />
+          </div>
+        </DialogContent> 
+        <ButtonGroup
       disableElevation
       variant="contained"
       aria-label="Disabled elevation buttons"
+      className='button'
     >
-      <Button>One</Button>
-      <Button>Two</Button>
-    </ButtonGroup> */}
-      </div>
-    );
-  }
+      <Button onClick={()=> handleEditGame()}> Editar</Button>
+      <Button onClick={()=> handleDeleteGame()}>Apagar</Button>
+    </ButtonGroup>
+       </Dialog>
+      
+    </div>
+  );
+}
+
+

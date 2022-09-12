@@ -1,0 +1,10 @@
+.list{
+  display: flex; 
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+/* .list:hover{
+  color: #fff;
+   background-color: green;
+} */

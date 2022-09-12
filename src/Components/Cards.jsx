@@ -5,6 +5,10 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Unstable_Grid2';
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import "./Card.css";
+
 export default function Card(props){
     const [open, setOpen] = useState(false);
 
@@ -15,6 +19,8 @@ export default function Card(props){
         textAlign: 'center',
         color: theme.palette.text.secondary,
       }));
+
+      
     return(
         <>
             <Edit
@@ -28,23 +34,27 @@ export default function Card(props){
                 setListCard={props.setListCard}
                 idcar={props.idcar}
             />
+
+
              <Box sx={{ width: '100%' }}>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Grid xs={12}>
-          <Item><div className="list">
+          <Item>
           <div onClick={()=>setOpen(true)}>
+    <div className="list">
           <div >Id: {props.idcar}</div>
           <div >Modelo: {props.modelo}</div>
           <div >Marca: {props.marca}</div>
           <div >Placa: {props.placa}</div>
           <div >Km: {props.km}</div>
           </div>
-          </div></Item>
+          </div>
+          </Item>
         </Grid> 
       </Grid>
     </Box>
 
-            
+        
         
         </>
     )

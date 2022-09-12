@@ -13,7 +13,7 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from "./Components/Cards"
-
+import ButtonGroup from '@mui/material/ButtonGroup';
 
 export default function App(props) {
   const [open, setOpen] = React.useState(false);
@@ -88,14 +88,13 @@ export default function App(props) {
   <>
 
 <Button variant="outlined" onClick={handleClickOpen}>
-        Open form dialog
+        Cadastrar
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Subscribe</DialogTitle>
+        
         <DialogContent>
           <DialogContentText>
-            To subscribe to this website, please enter your email address here. We
-            will send updates occasionally.
+            Cadastro de Veículos
           </DialogContentText>
           <TextField
             autoFocus
@@ -154,8 +153,9 @@ export default function App(props) {
           idcar={val.idcar}
           modelo={val.modelo}
           marca={val.marca}
-          placa={val.km}
+          placa={val.placa}
           km={val.km}
+
 
           />
 
