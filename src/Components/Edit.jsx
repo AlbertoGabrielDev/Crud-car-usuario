@@ -26,7 +26,7 @@ export default function Edit(props) {
   const handleClose = () => {
     props.setOpen(false);
   };
-
+//alterar os nomes aqui 
   const handleEditGame = () => {
     axios.put("http://localhost:3002/edit", {
       idcar: editValues.idcar,
@@ -35,7 +35,7 @@ export default function Edit(props) {
       placa: editValues.placa,
       km: editValues.km
     }).then(() => {
-      props.setListCard(
+      props.setListCard( //alterar os nomes aqui 
         props.listCard.map((value) => {
           return value.idcar === editValues.idcar
             ? {
@@ -52,10 +52,10 @@ export default function Edit(props) {
     handleClose();
   };
 
-
+//alterar os nomes aqui 
   const handleDeleteGame = () => {
     axios.delete(`http://localhost:3002/delete/${editValues.idcar}`).then(() => {
-      props.setListCard(
+      props.setListCard( //alterar os nomes aqui 
         props.listCard.filter((value) => {
           return value.idcar !== editValues.idcar;
         })

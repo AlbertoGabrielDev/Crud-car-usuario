@@ -6,16 +6,18 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
-// import { styled } from '@mui/material/styles';
-// import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
-import Card from "./Components/Cards"
+import Card from "./Components/Cards";
+import Post from "./Components/Post";
+import { Switch } from "@mui/material";
+import { Link, Route, Routes } from "react-router-dom";
+import Menu from './Components/Menu';
 
-export default function App(props) {
-  const [open, setOpen] = React.useState(false);
+export default function App() {
+  const [open, setOpen] = useState(false);
 
   const [values, setValues] = useState();
-  const [listCard, setListCard] = useState([]);
+  const [listCard, setListCard] = useState([]); //alterar os nomes aqui
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -25,18 +27,9 @@ export default function App(props) {
     setOpen(false);
   };
 
-  // const Item = styled(Paper)(({ theme }) => ({
-  //   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  //   ...theme.typography.body2,
-  //   padding: theme.spacing(1),
-  //   textAlign: 'center',
-  //   color: theme.palette.text.secondary,
-  // }));
+//alterar os nomes aqui 
+  const handleRegisterCar = () => {
 
-  
-
-  const handleRegisterGame = () => {
-    console.log(values);
     axios.post("http://localhost:3002/register", {
         modelo: values.modelo,
         marca: values.marca,
@@ -49,26 +42,26 @@ export default function App(props) {
             placa: values.placa,
             km: values.km,
         }).then((response) => {
-            setListCard([
-                ...listCard,
-                {
-                    idcar: response.data[0].idcar,
-                    modelo: values.modelo,
-                    marca: values.marca,
-                    placa: values.placa,
-                    km: values.km,
-                },
-            ]
-           
-            );
-        });
+          setListCard([
+              ...listCard, //alterar os nomes aqui 
+              {
+                  idcar: response.data[0].idcar,
+                  modelo: values.modelo,
+                  marca: values.marca,
+                  placa: values.placa,
+                  km: values.km,
+              },
+          ]
+         
+          );
+      });
     });
     handleClose();
 };
 
   useEffect(() => {
     axios.get("http://localhost:3002/list").then((response) => {
-      setListCard(response.data);
+      setListCard(response.data); //alterar os nomes aqui 
     })
   }, []);
 
@@ -83,6 +76,11 @@ export default function App(props) {
 
   return (
   <>
+  <Menu/>
+
+  <Routes>
+    <Route path='/cliente' element={<Post/>} />
+    </Routes>
 
 <Button variant="outlined" onClick={handleClickOpen}>
         Cadastrar
@@ -136,7 +134,7 @@ export default function App(props) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleRegisterGame}>Cadastrar</Button>
+          <Button onClick={handleRegisterCar}>Cadastrar</Button>
         </DialogActions>
       </Dialog>
 
@@ -157,9 +155,10 @@ export default function App(props) {
           />
 
         ))}
-
+      
+          
       </div>
-       {/* <button onClick={mostrar}>Novo</button> */}
+
        
   </>
       
