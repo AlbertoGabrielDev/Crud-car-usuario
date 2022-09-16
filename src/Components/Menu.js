@@ -7,8 +7,6 @@ const Menu = () => {
 
         <header className="menu">
             <Link className="nome" to="/cliente">Clientes</Link>
-           
-
         </header>
     )
 

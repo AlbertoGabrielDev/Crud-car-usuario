@@ -86,56 +86,60 @@ export default function App() {
           </Button>
         </div>
       </div>
+
       <Dialog open={open} onClose={handleClose}>
           <DialogContent>
-            <DialogContentText>
-              Cadastro de Veículos
-            </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="modelo"
-            label="Modelo"
-            type="text"
-            fullWidth
-            variant="standard"
-            onChange={handleaddValues}
-          />
+            <DialogContentText> Cadastro de Veículos </DialogContentText>
+
+            <TextField
+              autoFocus
+              margin="dense"
+              id="modelo"
+              label="Modelo"
+              type="text"
+              fullWidth
+              variant="standard"
+              onChange={handleaddValues}
+            />
+
            <TextField
-            autoFocus
-            margin="dense"
-            id="marca"
-            label="Marca"
-            type="text"
-            fullWidth
-            variant="standard"
-            onChange={handleaddValues}
-          />
+              autoFocus
+              margin="dense"
+              id="marca"
+              label="Marca"
+              type="text"
+              fullWidth
+              variant="standard"
+              onChange={handleaddValues}
+            />
            <TextField
-            autoFocus
-            margin="dense"
-            id="placa"
-            label="Placa"
-            type="text"
-            fullWidth
-            variant="standard"
-            onChange={handleaddValues}
-          />
+              autoFocus
+              margin="dense"
+              id="placa"
+              label="Placa"
+              type="text"
+              fullWidth
+              variant="standard"
+              onChange={handleaddValues}
+            />
+
            <TextField
-            autoFocus
-            margin="dense"
-            id="km"
-            label="Km"
-            type="text"
-            fullWidth
-            variant="standard"
-            onChange={handleaddValues}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleRegisterCar}>Cadastrar</Button>
-        </DialogActions>
+              autoFocus
+              margin="dense"
+              id="km"
+              label="Km"
+              type="text"
+              fullWidth
+              variant="standard"
+              onChange={handleaddValues}
+            />
+          </DialogContent>
+
+          <DialogActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleRegisterCar}>Cadastrar</Button>
+          </DialogActions>
+
       </Dialog>
 
       <div className="container">
