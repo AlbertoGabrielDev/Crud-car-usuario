@@ -75,12 +75,14 @@ export default function App() {
   <>
   <Menu/>
       <div className="container botao">    
+
         <div className="teste">
           <Routes>
             <Route path='/cliente' element={<Post/>} />
           </Routes>
         </div>
-        <div>
+
+        <div className="borda">
           <Button variant="outlined" onClick={handleClickOpen}>
             Cadastrar
           </Button>

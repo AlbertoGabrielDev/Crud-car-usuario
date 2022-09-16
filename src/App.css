@@ -15,9 +15,14 @@
     display: flex;
     justify-content: center;
     text-align: center;
-    width: 300px;
+    width: 250px;
 }
 
 .borda{
-    border: 1px solid green;
+    background-color: rgb(33, 49, 33);
+    border: 1px solid rgb(97, 192, 19);
+    margin: 1px;
+    padding: 1px;
+    border-radius: 5px;
+    color: white;
 }
