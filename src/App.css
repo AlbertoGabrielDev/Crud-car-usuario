@@ -1,12 +1,23 @@
-
-.list-mu{
-   display: flex; 
-    justify-content: space-between;
+ body{
+  background-color: white;
+  margin: 20px;
+  padding: 0;
  }
 
-
- .button{
-   display: flex;
-   
+ .container{
+    background-color: rgb(213, 216, 216);
+    border-radius: 15px;
+    margin: 10px;
  }
 
+.botao{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: 300px;
+}
+
+.borda{
+    border: 1px solid green;
+}

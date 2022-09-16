@@ -9,8 +9,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import Button from '@mui/material/Button';
 import Card from "./Components/Cards";
 import Post from "./Components/Post";
-import { Switch } from "@mui/material";
-import { Link, Route, Routes } from "react-router-dom";
+import {  Route, Routes } from "react-router-dom";
 import Menu from './Components/Menu';
 
 export default function App() {
@@ -72,25 +71,26 @@ export default function App() {
     }));
 };
 
-
-
   return (
   <>
   <Menu/>
-
-  <Routes>
-    <Route path='/cliente' element={<Post/>} />
-    </Routes>
-
-<Button variant="outlined" onClick={handleClickOpen}>
-        Cadastrar
-      </Button>
+      <div className="container botao">    
+        <div className="teste">
+          <Routes>
+            <Route path='/cliente' element={<Post/>} />
+          </Routes>
+        </div>
+        <div>
+          <Button variant="outlined" onClick={handleClickOpen}>
+            Cadastrar
+          </Button>
+        </div>
+      </div>
       <Dialog open={open} onClose={handleClose}>
-        
-        <DialogContent>
-          <DialogContentText>
-            Cadastro de Veículos
-          </DialogContentText>
+          <DialogContent>
+            <DialogContentText>
+              Cadastro de Veículos
+            </DialogContentText>
           <TextField
             autoFocus
             margin="dense"
@@ -138,7 +138,7 @@ export default function App() {
         </DialogActions>
       </Dialog>
 
-      <div className="conteiner">
+      <div className="container">
       {
         listCard.map((val)=>(
           <Card
