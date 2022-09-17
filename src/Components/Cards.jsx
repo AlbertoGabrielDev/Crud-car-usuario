@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-//criar um formdialg igual o outro, e na parte das divs, usar o meu forms
 import Edit from "./Edit";
 import "./Card.css";
 
@@ -15,8 +14,8 @@ export default function Card(props){
                 marca={props.marca}
                 placa={props.placa}
                 km={props.km}
-                listCard={props.listCard}
-                setListCard={props.setListCard}
+                listCar={props.listCar}
+                setListCar={props.setListCar}
                 idcar={props.idcar}
             />
 

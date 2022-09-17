@@ -27,7 +27,7 @@ export default function Edit(props) {
     props.setOpen(false);
   };
 //alterar os nomes aqui 
-  const handleEditGame = () => {
+  const handleEditCar = () => {
     axios.put("http://localhost:3002/edit", {
       idcar: editValues.idcar,
       modelo: editValues.modelo,
@@ -35,8 +35,8 @@ export default function Edit(props) {
       placa: editValues.placa,
       km: editValues.km
     }).then(() => {
-      props.setListCard( //alterar os nomes aqui 
-        props.listCard.map((value) => {
+      props.setListCar( //alterar os nomes aqui 
+        props.listCar.map((value) => {
           return value.idcar === editValues.idcar
             ? {
               idcar: editValues.id,
@@ -52,11 +52,11 @@ export default function Edit(props) {
     handleClose();
   };
 
-//alterar os nomes aqui 
-  const handleDeleteGame = () => {
+
+  const handleDeleteCar = () => {
     axios.delete(`http://localhost:3002/delete/${editValues.idcar}`).then(() => {
-      props.setListCard( //alterar os nomes aqui 
-        props.listCard.filter((value) => {
+      props.setListCar(
+        props.listCar.filter((value) => {
           return value.idcar !== editValues.idcar;
         })
       );
@@ -130,8 +130,8 @@ export default function Edit(props) {
       aria-label="Disabled elevation buttons"
       className='button'
     >
-      <Button onClick={()=> handleEditGame()}> Editar</Button>
-      <Button onClick={()=> handleDeleteGame()}>Apagar</Button>
+      <Button onClick={()=> handleEditCar()}> Editar</Button>
+      <Button onClick={()=> handleDeleteCar()}>Apagar</Button>
     </ButtonGroup>
        </Dialog>
       

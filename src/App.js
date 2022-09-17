@@ -8,15 +8,15 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import Button from '@mui/material/Button';
 import Card from "./Components/Cards";
-import Post from "./Components/Post";
-import {  Route, Routes } from "react-router-dom";
-import Menu from './Components/Menu';
+
+
+
 
 export default function App() {
   const [open, setOpen] = useState(false);
 
   const [values, setValues] = useState();
-  const [listCard, setListCard] = useState([]); //alterar os nomes aqui
+  const [listCar, setListCar] = useState([]); //alterar os nomes aqui
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -41,8 +41,8 @@ export default function App() {
             placa: values.placa,
             km: values.km,
         }).then((response) => {
-          setListCard([
-              ...listCard, //alterar os nomes aqui 
+          setListCar([
+              ...listCar, //alterar os nomes aqui 
               {
                   idcar: response.data[0].idcar,
                   modelo: values.modelo,
@@ -60,7 +60,7 @@ export default function App() {
 
   useEffect(() => {
     axios.get("http://localhost:3002/list").then((response) => {
-      setListCard(response.data); //alterar os nomes aqui 
+      setListCar(response.data); //alterar os nomes aqui 
     })
   }, []);
 
@@ -73,14 +73,10 @@ export default function App() {
 
   return (
   <>
-  <Menu/>
+ 
       <div className="container botao">    
 
-        <div className="teste">
-          <Routes>
-            <Route path='/cliente' element={<Post/>} />
-          </Routes>
-        </div>
+        
 
         <div className="borda">
           <Button variant="outlined" onClick={handleClickOpen}>
@@ -146,10 +142,10 @@ export default function App() {
 
       <div className="container">
       {
-        listCard.map((val)=>(
+        listCar.map((val)=>(
           <Card
-          listCard={listCard}
-          setListCard={setListCard}
+          listCar={listCar}
+          setListCar={setListCar}
           key={val.idcar}
           idcar={val.idcar}
           modelo={val.modelo}
